@@ -5,6 +5,8 @@ export type ProductSize = "S" | "M" | "L" | "XL";
 export type ProductCategory = {
   _id: string;
   name: string;
+  level?: number;
+  parent?: string;
 };
 
 export type ProductImage = {
