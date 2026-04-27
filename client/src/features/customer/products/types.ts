@@ -16,6 +16,7 @@ export type ProductImage = {
 export type CustomerProduct = {
   _id: string;
   title: string;
+  brand?: string;
   description: string;
   category: ProductCategory;
   subcategory?: ProductCategory;

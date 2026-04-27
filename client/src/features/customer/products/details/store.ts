@@ -152,7 +152,7 @@ export const useCustomerProductDetailsStore =
           color: selectedColor || undefined,
           size: selectedSize || undefined,
           title: product.title,
-          brand: product.brand,
+          brand: product.brand || "",
           image: getCoverImage(product),
           finalPrice: product.salePercentage
             ? product.price - (product.price * product.salePercentage) / 100

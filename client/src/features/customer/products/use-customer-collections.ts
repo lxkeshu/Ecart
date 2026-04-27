@@ -1,4 +1,4 @@
-import type { Category } from "@/features/admin/products/types";
+import type { ProductCategory } from "./types";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import type {
@@ -16,7 +16,7 @@ import { getCustomerCategories, getCustomerProducts } from "./api";
 export function useCustomerProductList() {
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const [categories, setCategories] = useState<Category[]>([]);
+  const [categories, setCategories] = useState<ProductCategory[]>([]);
   const [products, setProducts] = useState<CustomerProduct[]>([]);
 
   const [loading, setLoading] = useState(false);
@@ -26,6 +26,8 @@ export function useCustomerProductList() {
       category: searchParams.get("category") || "",
       subcategory: searchParams.get("subcategory") || "",
       subSubcategory: searchParams.get("subSubcategory") || "",
+      color: searchParams.get("color") || "",
+      size: searchParams.get("size") || "",
     }),
     [searchParams],
   );

@@ -102,7 +102,6 @@ function Collections() {
     products,
     hasActiveFilters,
     categories,
-    availableColors,
     filters,
     toggleFacet,
     clearFilters,
@@ -126,9 +125,7 @@ function Collections() {
 
         <div className="mx-auto max-w-7xl px-4 py-12">
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {categories
-              .filter((c) => !c.parent || (c.level ?? 1) === 1)
-              .map((category) => (
+            {categories.map((category) => (
                 <Card
                   key={category._id}
                   className="group cursor-pointer overflow-hidden border-border/60 transition-all hover:border-primary/50 hover:shadow-lg"
