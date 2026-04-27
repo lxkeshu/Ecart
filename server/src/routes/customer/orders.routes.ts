@@ -30,7 +30,7 @@ customerOrderRouter.get(
   asyncHandler(async (req: Request, res: Response) => {
     const dbUser = await getDbUserFromReq(req);
 
-    const orders = await Order.find({ user: dbUser._id })
+    const orders = await Order.find({ user: dbUser._id, paymentStatus: "paid" })
       .select(
         "totalItems totalAmount paymentStatus orderStatus  paidAt deliveredAt returnedAt createdAt",
       )

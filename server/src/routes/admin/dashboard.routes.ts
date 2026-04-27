@@ -27,8 +27,8 @@ adminDashboardRouter.get(
     ] = await Promise.all([
       Product.countDocuments(),
       Category.countDocuments(),
-      Order.countDocuments(),
-      Order.countDocuments({ orderStatus: "returned" }),
+      Order.countDocuments({ paymentStatus: "paid" }),
+      Order.countDocuments({ paymentStatus: "paid", orderStatus: "returned" }),
       Order.aggregate<TotalSaleRow>([
         { $match: { paymentStatus: "paid" } },
         { $group: { _id: null, totalSales: { $sum: "$totalAmount" } } },

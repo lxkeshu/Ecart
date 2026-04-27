@@ -21,6 +21,7 @@ import {
 } from "@/components/ui/select";
 import { formatPrice } from "@/lib/utils";
 import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 
 /* ── shared tokens ── */
 const sectionTitleClass = "text-sm font-medium text-foreground";
@@ -232,6 +233,10 @@ function CustomerCartAndCheckoutDrawer() {
       <>
         <Button
           onClick={() => {
+            if (!selectedAddressId) {
+              toast.error("Please add a default address first");
+              return;
+            }
             void setOpen(false);
             void startRazorpayCheckout({
               isSignedIn: Boolean(isSignedIn),
@@ -245,7 +250,6 @@ function CustomerCartAndCheckoutDrawer() {
           disabled={
             loading ||
             !cart.items.length ||
-            !selectedAddressId ||
             checkoutLoading ||
             pointsCheckoutLoading
           }
@@ -254,6 +258,14 @@ function CustomerCartAndCheckoutDrawer() {
         </Button>
         <Button
           onClick={() => {
+            if (!selectedAddressId) {
+              toast.error("Please add a default address first");
+              return;
+            }
+            if (points < totalAmount) {
+              toast.error("You don't have enough points");
+              return;
+            }
             void startPointsCheckout({
               isSignedIn: Boolean(isSignedIn),
               onSuccess: () => navigate("/order-success"),
@@ -262,9 +274,7 @@ function CustomerCartAndCheckoutDrawer() {
           disabled={
             !(
               Boolean(isSignedIn) &&
-              Boolean(selectedAddressId) &&
               Boolean(cart.items.length) &&
-              points >= totalAmount &&
               !checkoutLoading &&
               !pointsCheckoutLoading
             )

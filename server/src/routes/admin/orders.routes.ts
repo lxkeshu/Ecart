@@ -38,7 +38,7 @@ adminOrderRouter.use(requireAdmin);
 adminOrderRouter.get(
   "/orders",
   asyncHandler(async (req: Request, res: Response) => {
-    const orders = await Order.find()
+    const orders = await Order.find({ paymentStatus: "paid" })
       .select(
         "customerName customerEmail totalItems totalAmount paymentStatus orderStatus  paidAt deliveredAt returnedAt createdAt",
       )
