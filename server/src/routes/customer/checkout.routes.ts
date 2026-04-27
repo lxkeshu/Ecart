@@ -46,6 +46,9 @@ type ProductRow = {
 };
 
 type PromoRow = {
+  code: string;
+  percentage: number;
+  count: number;
   minimumOrderValue: number;
   maxDiscountAmount?: number;
   startsAt: Date;
